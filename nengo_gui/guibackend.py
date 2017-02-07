@@ -171,7 +171,7 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
                 r.append(b'<li class="directory collapsed">'
                          b'<a href="#" rel="' + ff + b'/">' + f + b'</a></li>')
             else:
-                e = os.path.splitext(f)[1][1:] # get .ext and remove dot
+                e = os.path.splitext(f)[1][1:]  # get .ext and remove dot
                 if e == 'py':
                     e = e.encode('utf-8')
                     f = f.encode('utf-8')
@@ -365,9 +365,10 @@ class GuiServer(server.ManagedThreadHttpServer):
         server.ManagedThreadHttpServer.__init__(
             self, self.settings.listen_addr, GuiRequestHandler)
         if self.settings.use_ssl:
-            self.socket = ssl.wrap_socket(
-                self.socket, certfile=self.settings.ssl_cert,
-                keyfile=self.settings.ssl_key, server_side=True)
+            for b in self.bindings:
+                b.socket = ssl.wrap_socket(
+                    b.socket, certfile=self.settings.ssl_cert,
+                    keyfile=self.settings.ssl_key, server_side=True)
 
         self.sessions = SessionManager(self.settings.session_duration)
 
