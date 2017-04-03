@@ -311,6 +311,7 @@ Nengo.NetGraph = function(parent, args) {
     this.create_minimap();
 };
 
+
 Nengo.NetGraph.prototype.generate_menu = function() {
     var self = this;
     var items = [];
@@ -682,4 +683,14 @@ Nengo.NetGraph.prototype.scaleMiniMapViewBox = function () {
     this.view.setAttributeNS(null, 'y', view_offsetY);
     this.view.setAttribute('width', w / this.scale);
     this.view.setAttribute('height', h / this.scale);
+}
+
+/** Called from the individual component ondragmove handlers to pan the entire
+ * view if either CTRL or the middle mouse button is pressed. */
+Nengo.NetGraph.prototype.capture_move_event = function (event) {
+    if (event.ctrlKey || (event.buttons & 4)) {
+        interact(this.svg).ondragmove(event);
+        return true;
+    }
+    return false;
 }
