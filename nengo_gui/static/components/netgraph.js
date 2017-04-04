@@ -311,7 +311,6 @@ Nengo.NetGraph = function(parent, args) {
     this.create_minimap();
 };
 
-
 Nengo.NetGraph.prototype.generate_menu = function() {
     var self = this;
     var items = [];
