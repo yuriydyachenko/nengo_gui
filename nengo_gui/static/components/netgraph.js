@@ -690,7 +690,10 @@ Nengo.NetGraph.prototype.scaleMiniMapViewBox = function () {
  * no further event processing must be performed by the calling code.
  * Returns false otherwise. */
 Nengo.NetGraph.prototype.capture_move_event = function (event) {
-    if (event.ctrlKey || (event.buttons & 4)) {
+    // For more constants see https://www.w3.org/TR/uievents/#mouseevent
+    var MOUSE_BUTTON_MIDDLE_MASK = 4
+
+    if (event.ctrlKey || (event.buttons & MOUSE_BUTTON_MIDDLE_MASK)) {
         interact(this.svg).ondragmove(event);
         return true;
     }
