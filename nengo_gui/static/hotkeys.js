@@ -14,6 +14,9 @@ Nengo.Hotkeys = function () {
 
             var on_editor = (ev.target.className === 'ace_text-input');
             var on_searchbox = (ev.target.className === 'ace_search_field');
+            var on_slider = (ev.target.id === "value_in_field");
+
+            var on_editable = on_editor || on_searchbox || on_slider;
 
             if (typeof ev.key != 'undefined') {
                 var key = ev.key;
@@ -78,7 +81,7 @@ Nengo.Hotkeys = function () {
                 ev.preventDefault();
             }
             // disable backspace navigation
-            if (key == 'backspace' && !on_editor && !on_searchbox) {
+            if (key == 'backspace' && !on_editable) {
                 ev.preventDefault();
             }
             // toggle auto-updating with TODO: pick a good shortcut
