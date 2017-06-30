@@ -13,6 +13,7 @@ Nengo.Hotkeys = function () {
         if (self.active) {
 
             var on_editor = (ev.target.className === 'ace_text-input');
+            var on_searchbox = (ev.target.className === 'ace_search_field');
 
             if (typeof ev.key != 'undefined') {
                 var key = ev.key;
@@ -77,7 +78,7 @@ Nengo.Hotkeys = function () {
                 ev.preventDefault();
             }
             // disable backspace navigation
-            if (key == 'backspace' && !on_editor) {
+            if (key == 'backspace' && !on_editor && !on_searchbox) {
                 ev.preventDefault();
             }
             // toggle auto-updating with TODO: pick a good shortcut
