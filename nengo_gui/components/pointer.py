@@ -5,9 +5,9 @@ import nengo
 import nengo.spa as spa
 try:
     import nengo_spa
+    from nengo_spa.examine import pairs
 except ImportError:
     nengo_spa = None
-from nengo_spa.examine import pairs
 import numpy as np
 
 from nengo_gui.components.component import Component
