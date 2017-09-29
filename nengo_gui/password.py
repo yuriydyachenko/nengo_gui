@@ -15,7 +15,8 @@ def hashpw(password, salt, algorithm='sha1'):
     h = hashlib.new(algorithm)
     h.update(password)
     h.update(salt)
-    return algorithm + ':' + salt + ':' + h.hexdigest()
+    return (algorithm.encode('ascii') + b':' + salt + b':' +
+        h.hexdigest().encode('ascii'))
 
 def checkpw(password, hashed):
     algorithm, salt, _ = hashed.split(':')
@@ -26,5 +27,5 @@ def prompt_pw():
         p0 = getpass("Enter password: ")
         p1 = getpass("Enter password: ")
         if p0 == p1:
-            return p0
+            return p0.encode('utf-8')
         print("Passwords do not match. Please try again.")
